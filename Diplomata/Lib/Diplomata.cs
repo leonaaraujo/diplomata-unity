@@ -7,9 +7,9 @@ namespace DiplomataLib {
     [ExecuteInEditMode]
     public class Diplomata : MonoBehaviour {
         public static Diplomata instance = null;
-        public static Preferences preferences;
-        public static GameProgress gameProgress;
-        public static List<Character> characters;
+        public static Preferences preferences = new Preferences();
+        public static GameProgress gameProgress = new GameProgress();
+        public static List<Character> characters = new List<Character>();
 
         public void Awake() {
             if (instance == null) {
@@ -29,36 +29,18 @@ namespace DiplomataLib {
 
         public static void Restart() {
             preferences = new Preferences();
-            preferences.Start();
-            
+
+            var json = (TextAsset) Resources.Load("Diplomata/preferences");
+
+            if (json != null) {
+                preferences = JsonUtility.FromJson<Preferences>(json.text);
+            }
+
             characters = new List<Character>();
             Character.UpdateList();
             
             gameProgress = new GameProgress();
             gameProgress.Start();
-        }
-
-        public static void Instantiate() {
-            #if UNITY_EDITOR
-
-            if (instance == null && FindObjectsOfType<Diplomata>().Length < 1) {
-                GameObject obj = new GameObject("[ Diplomata ]");
-                obj.AddComponent<Diplomata>();
-            }
-
-            Restart();
-            
-            #endif
-        }
-
-        private void CheckRepeated() {
-            var repeated = FindObjectsOfType<Diplomata>();
-
-            foreach (Diplomata item in repeated) {
-                if (!item.Equals(instance)) {
-                    DestroyImmediate(item.gameObject);
-                }
-            }
         }
     }
 

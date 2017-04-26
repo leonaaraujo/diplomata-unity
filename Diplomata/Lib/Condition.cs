@@ -1,18 +1,21 @@
-﻿using UnityEngine.Events;
-
-namespace DiplomataLib {
+﻿namespace DiplomataLib {
 
     [System.Serializable]
     public class Condition {
 
-        public string displayName = "None.";
+        public string displayName = "None";
         public Type type;
-        public string afterOfMessageName = "<none>";
+        public DictLang[] afterOfMessageName = new DictLang[0];
+        public int afterOfMessageId = -1;
+        public int afterOfMessageColumnId = -1;
         public int comparedInfluence;
-        public string characterInfluencedName = "<none>";
+        public string characterInfluencedName;
 
         [System.NonSerialized]
-        public UnityEvent custom;
+        public Events custom = new Events();
+
+        [System.NonSerialized]
+        public bool proceed = true;
 
         public enum Type {
             None,
@@ -25,37 +28,35 @@ namespace DiplomataLib {
         public Condition() { }
 
         public void DisplayNone() {
-            displayName = "None.";
-        }
-
-        public void ApplyAfterOf(string messageName) {
-            afterOfMessageName = messageName;
-            DisplayAfterOf();
+            displayName = "None";
         }
 
         public void DisplayAfterOf() {
-            displayName = "After of " + afterOfMessageName + ".";
+            displayName = "After of <i>" + afterOfMessageName[0].value + "</i>";
         }
-
-        public void ApplyCompareInfluence(string characterName, int influence) {
-            comparedInfluence = influence;
-            characterInfluencedName = characterName;
-
-            DisplayCompareInfluence();
-        }
-
+        
         public void DisplayCompareInfluence() {
             switch (type) {
                 case Type.InfluenceEqualTo:
-                    displayName = "Influence equal to " + comparedInfluence + " in " + characterInfluencedName + ".";
+                    displayName = "Influence <i>equal</i> to \n<i>" + comparedInfluence + "</i> in <i>" + characterInfluencedName + "</i>";
                     break;
                 case Type.InfluenceGreaterThan:
-                    displayName = "Influence greater then " + comparedInfluence + " in " + characterInfluencedName + ".";
+                    displayName = "Influence <i>greater</i> then \n<i>" + comparedInfluence + "</i> in <i>" + characterInfluencedName + "</i>";
                     break;
                 case Type.InfluenceLessThan:
-                    displayName = "Influence less then " + comparedInfluence + " in " + characterInfluencedName + ".";
+                    displayName = "Influence <i>less</i> then \n<i>" + comparedInfluence + "</i> in <i>" + characterInfluencedName + "</i>";
                     break;
             }
+        }
+
+        public static bool CanProceed(Condition[] conditions) {
+            foreach (Condition condition in conditions) {
+                if (!condition.proceed) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 
