@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace DiplomataLib
+namespace Diplomata.Models
 {
-
   public class Events
   {
     protected List<Event> events = new List<Event>();
@@ -72,5 +71,4 @@ namespace DiplomataLib
       return true;
     }
   }
-
 }
