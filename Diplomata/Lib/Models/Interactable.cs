@@ -50,17 +50,15 @@ namespace Diplomata.Models
       }
     }
 
-    public static Interactable Find(List<Interactable> interactables, string name)
+    /// <summary>
+    /// Find a interactable by name.
+    /// </summary>
+    /// <param name="list">A list of interactables.</param>
+    /// <param name="name">The name of the interactable.</param>
+    /// <returns>The interactable if found, or null.</returns>
+    public static Interactable Find(List<Interactable> list, string name)
     {
-      foreach (Interactable interactable in interactables)
-      {
-        if (interactable.name == name)
-        {
-          return interactable;
-        }
-      }
-
-      return null;
+      return (Interactable) Helpers.Find.In(list.ToArray()).Where("name", name).Result;
     }
   }
 }

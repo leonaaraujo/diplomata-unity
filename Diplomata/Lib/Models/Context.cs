@@ -71,48 +71,24 @@ namespace Diplomata.Models
       }
     }
 
-    public static Context Find(Talkable talkable, int id)
+    /// <summary>
+    /// Find a context by id.
+    /// </summary>
+    /// <param name="talkable">A talkable (Character or Interactable).</param>
+    /// <param name="contextId">The id of the context.</param>
+    /// <returns>The context if found, or null.</returns>
+    public static Context Find(Talkable talkable, int contextId)
     {
-      if (talkable != null)
-      {
-        foreach (Context context in talkable.contexts)
-        {
-          if (context.id == id)
-          {
-            return context;
-          }
-        }
-      }
-
-      return null;
-    }
-
-    public static Context Find(Talkable talkable, string name, string language)
-    {
-      if (talkable != null)
-      {
-
-        foreach (Context context in talkable.contexts)
-        {
-          LanguageDictionary contextName = DictionariesHelper.ContainsKey(context.name, language);
-
-          if (name == contextName.value)
-          {
-            return context;
-          }
-        }
-      }
-
-      return null;
+      return (Context) Helpers.Find.In(talkable.contexts).Where("id", contextId).Result;
     }
 
     public static Context[] ResetIDs(Talkable talkable, Context[] array)
     {
-      Context[] temp = new Context[0];
+      var temp = new Context[0];
 
       for (int i = 0; i < array.Length + 1; i++)
       {
-        Context ctx = Find(talkable, i);
+        var ctx = Find(talkable, i);
 
         if (ctx != null)
         {

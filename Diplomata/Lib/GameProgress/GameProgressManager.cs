@@ -101,7 +101,7 @@ namespace Diplomata.GameProgress
     {
       foreach (CharacterProgress character in characters)
       {
-        var characterTemp = (Character) Find.In(DiplomataData.characters.ToArray()).Where("name", character.name).Results[0];
+        var characterTemp = Character.Find(DiplomataData.characters, character.name);
         characterTemp.influence = character.influence;
 
         foreach (ContextProgress context in character.contexts)
@@ -126,20 +126,21 @@ namespace Diplomata.GameProgress
     {
       foreach (InteractableProgress interactable in interactables)
       {
+
         var interactableTemp = Interactable.Find(DiplomataData.interactables, interactable.name);
 
         foreach (ContextProgress context in interactable.contexts)
         {
-          var contextTemp = Context.Find(interactableTemp, (int) context.id);
+          var contextTemp = Context.Find(interactableTemp, (int)context.id);
           contextTemp.happened = context.happened;
 
           foreach (ColumnProgress column in context.columns)
           {
-            var columnTemp = Column.Find(contextTemp, (int) column.id);
+            var columnTemp = Column.Find(contextTemp, (int)column.id);
 
             foreach (MessageProgress message in column.messages)
             {
-              Message.Find(columnTemp.messages, (int) message.id).alreadySpoked = message.alreadySpoked;
+              Message.Find(columnTemp.messages, (int)message.id).alreadySpoked = message.alreadySpoked;
             }
           }
         }

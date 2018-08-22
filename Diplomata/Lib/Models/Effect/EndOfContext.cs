@@ -24,12 +24,22 @@ namespace Diplomata.Models
 
     public Context GetContext(List<Character> characters, List<Interactable> interactables)
     {
-      var character = (Character) Find.In(characters.ToArray()).Where("name", talkableName).Results[0];
+      var character = Character.Find(characters, talkableName);
+      if (character != null)
+      {
+        var context = Context.Find(character, contextId);
+        if (context != null)
+          return context;
+      }
 
-      if (Context.Find(character, contextId) != null) return Context.Find(character, contextId);
+      var interactable = Interactable.Find(interactables, talkableName);
+      if (interactable != null)
+      {
+        var context = Context.Find(interactable, contextId);
+        if (context != null)
+          return context;
+      }
 
-      if (Context.Find(Interactable.Find(interactables, talkableName), contextId) != null)
-        return Context.Find(Interactable.Find(interactables, talkableName), contextId);
       return null;
     }
   }

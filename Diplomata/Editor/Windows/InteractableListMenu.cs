@@ -71,8 +71,8 @@ namespace DiplomataEditor.Windows
         {
           if (EditorUtility.DisplayDialog("Are you sure?", "Do you really want to delete?\nThis data will be lost forever.", "Yes", "No"))
           {
-
-            diplomataEditor.interactables.Remove(Interactable.Find(diplomataEditor.interactables, name));
+            var interactable = (Interactable.Find(diplomataEditor.interactables, name));
+            diplomataEditor.interactables.Remove(interactable);
             diplomataEditor.options.interactableList = ArrayHelper.Remove(diplomataEditor.options.interactableList, name);
 
             JSONHelper.Delete(name, "Diplomata/Interactables/");

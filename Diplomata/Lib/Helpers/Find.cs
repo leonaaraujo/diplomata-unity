@@ -33,6 +33,18 @@ namespace Diplomata.Helpers
       }
     }
 
+    public object Result
+    {
+      get
+      {
+        return Results[0];
+      }
+      private set
+      {
+        results[0] = value;
+      }
+    }
+
     public Subject(object[] collection)
     {
       results = new List<object>();
@@ -57,8 +69,34 @@ namespace Diplomata.Helpers
           }
         }
       }
-
       return this;
+    }
+
+    public Subject In(string collectionName)
+    {
+      var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+      foreach (var field in fields)
+      {
+        if (field.Name == collectionName)
+        {
+          foreach (var instance in collection)
+          {
+            if (field.GetType() == typeof(Array))
+            {
+              return new Subject((object[]) field.GetValue(instance));
+            }
+            if (field.GetType() == typeof(List<object>))
+            {
+              var list = (List<object>) field.GetValue(instance);
+              return new Subject(list.ToArray());
+            }
+          }
+        }
+      }
+      
+      Debug.LogError(string.Format("No results found. for {0}.", collectionName));
+      return null;
     }
   }
 
