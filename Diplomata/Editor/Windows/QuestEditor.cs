@@ -1,14 +1,14 @@
 using System.Collections.Generic;
+using Diplomata.Editor;
+using Diplomata.Editor.Helpers;
 using Diplomata.Helpers;
 using Diplomata.Models;
-using DiplomataEditor;
-using DiplomataEditor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace DiplomataEditor.Windows
+namespace Diplomata.Editor.Windows
 {
-  public class QuestEditor : EditorWindow
+  public class QuestEditor : UnityEditor.EditorWindow
   {
     public static Quest quest;
     private Vector2 scrollPos = new Vector2(0, 0);
@@ -81,10 +81,10 @@ namespace DiplomataEditor.Windows
           GUILayout.EndHorizontal();
 
           // Loop of the quest states.
-          foreach (QuestState state in quest.GetQuestStates())
+          foreach (var questState in quest.GetQuestStates())
           {
             GUILayout.BeginHorizontal();
-            state.Name = EditorGUILayout.TextField(state.Name);
+            questState.Name = EditorGUILayout.TextField(questState.Name);
             GUILayout.EndHorizontal();
           }
 
@@ -108,7 +108,7 @@ namespace DiplomataEditor.Windows
           // Save and close on press Enter.
           if (focusedWindow != null)
           {
-            if (focusedWindow.ToString() == "(DiplomataEditor.Windows.QuestEditor)")
+            if (focusedWindow.ToString() == "(Diplomata.Editor.Windows.QuestEditor)")
             {
               if (Event.current.keyCode == KeyCode.Return)
               {
