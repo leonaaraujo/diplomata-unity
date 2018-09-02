@@ -29,7 +29,7 @@ namespace Diplomata.Editor.Extensions
       var characters = CharactersController.GetCharacters(options);
       RTFDocument doc = CreateDocument();
 
-      foreach (Character character in characters)
+      foreach (Character character in diplomataEditor.characters)
       {
         doc = AddTalkable(doc, character, options);
       }
