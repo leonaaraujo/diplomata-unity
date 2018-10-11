@@ -4,7 +4,6 @@ using System.IO;
 using LavaLeak.Diplomata.Helpers;
 using LavaLeak.Diplomata.Models;
 using LavaLeak.Diplomata.Models.Collections;
-using LavaLeak.Diplomata.Persistence;
 using UnityEngine;
 
 namespace LavaLeak.Diplomata
@@ -13,7 +12,7 @@ namespace LavaLeak.Diplomata
   /// The Data storage class, here are all the Diplomata Data fields.
   /// </summary>
   [Serializable]
-  public class DiplomataData
+  public class DiplomataData : MonoBehaviour
   {
     public Options options = new Options();
     public List<Character> characters = new List<Character>();
@@ -22,6 +21,14 @@ namespace LavaLeak.Diplomata
     public GlobalFlags globalFlags = new GlobalFlags();
     public Quest[] quests = new Quest[0];
     public TalkLog[] talkLogs = new TalkLog[0];
+    public DiplomataEventController EventController = new DiplomataEventController();
+    public bool OnATalk;
+
+    private void Awake()
+    {
+      ReadJSONs();
+      DontDestroyOnLoad(gameObject);
+    }
 
     /// <summary>
     /// Get the JSON's data.
@@ -55,8 +62,8 @@ namespace LavaLeak.Diplomata
     {
       try
       {
-        TextAsset json = (TextAsset) Resources.Load(Path.Combine(folder, filename));
-        if (json == null) json = (TextAsset) Resources.Load(filename);
+        TextAsset json = (TextAsset)Resources.Load(Path.Combine(folder, filename));
+        if (json == null) json = (TextAsset)Resources.Load(filename);
         return JsonUtility.FromJson<T>(json.text);
       }
       catch (Exception e)
@@ -82,7 +89,7 @@ namespace LavaLeak.Diplomata
 
       foreach (UnityEngine.Object obj in charactersFiles)
       {
-        var json = (TextAsset) obj;
+        var json = (TextAsset)obj;
         var character = JsonUtility.FromJson<Character>(json.text);
 
         characters.Add(character);
@@ -91,7 +98,7 @@ namespace LavaLeak.Diplomata
 
       foreach (UnityEngine.Object obj in interactablesFiles)
       {
-        var json = (TextAsset) obj;
+        var json = (TextAsset)obj;
         var interactable = JsonUtility.FromJson<Interactable>(json.text);
 
         interactables.Add(interactable);
