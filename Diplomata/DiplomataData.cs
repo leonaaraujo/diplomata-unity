@@ -26,6 +26,18 @@ namespace LavaLeak.Diplomata
 
     private void Awake()
     {
+      Reset();
+      DontDestroyOnLoad(gameObject);
+    }
+
+    /// <summary>
+    /// Reset all fields.
+    /// </summary>
+    public void Reset()
+    {
+      talkLogs = new TalkLog[0];
+      EventController = new DiplomataEventController();
+      OnATalk = false;
       ReadJSONs();
       DontDestroyOnLoad(gameObject);
     }
