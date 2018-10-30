@@ -14,13 +14,13 @@ namespace LavaLeak.Diplomata
   [Serializable]
   public class DiplomataData : MonoBehaviour
   {
-    public Options options = new Options();
-    public List<Character> characters = new List<Character>();
-    public List<Interactable> interactables = new List<Interactable>();
-    public Inventory inventory = new Inventory();
-    public GlobalFlags globalFlags = new GlobalFlags();
-    public Quest[] quests = new Quest[0];
-    public TalkLog[] talkLogs = new TalkLog[0];
+    public Options options;
+    public List<Character> characters;
+    public List<Interactable> interactables;
+    public Inventory inventory;
+    public GlobalFlags globalFlags;
+    public Quest[] quests;
+    public TalkLog[] talkLogs;
     public DiplomataEventController EventController = new DiplomataEventController();
     public bool OnATalk;
 
@@ -30,10 +30,14 @@ namespace LavaLeak.Diplomata
     public void Reset()
     {
       talkLogs = new TalkLog[0];
-      EventController = new DiplomataEventController();
       OnATalk = false;
       ReadJSONs();
       DontDestroyOnLoad(gameObject);
+    }
+
+    public void RemoveEvents()
+    {
+      EventController = new DiplomataEventController();
     }
 
     /// <summary>
