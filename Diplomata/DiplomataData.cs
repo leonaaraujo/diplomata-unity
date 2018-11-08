@@ -40,6 +40,11 @@ namespace LavaLeak.Diplomata
       EventController = new DiplomataEventController();
     }
 
+    public void RemoveEvents()
+    {
+      EventController = new DiplomataEventController();
+    }
+
     /// <summary>
     /// Get the JSON's data.
     /// </summary>

@@ -19,7 +19,7 @@ namespace LavaLeak.Diplomata.Editor.Extensions
       var characters = CharactersController.GetCharacters(options);
       RTFDocument doc = CreateDocument();
 
-      foreach (Character character in diplomataEditor.characters)
+      foreach (Character character in characters)
       {
         doc = AddTalkable(doc, character, options);
       }
