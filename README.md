@@ -1,4 +1,8 @@
-<img src="https://raw.githubusercontent.com/lavaleak/diplomata/master/Textures/DIPLOMATA-Logo_CC-BY-ND_by-Leona-Araujo.png" alt="Diplomata Logo" title="Diplomata Logo by Leona Araujo is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License." width="115" height="115" /><br/>
+:rotating_light: This repository will marked as read-only and marked as legacy soon to be replaced by a new **diplomata-unity** :rotating_light:
+
+---
+
+<img src="https://raw.githubusercontent.com/lavaleak/diplomata-unity/master/Textures/DIPLOMATA-Logo_CC-BY-ND_by-Leona-Araujo.png" alt="Diplomata Logo" title="Diplomata Logo by Leona Araujo is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License." width="115" height="115" /><br/>
 
 # Diplomata
 
@@ -9,7 +13,7 @@ Diplomata manage optionally other contents of a game like characters, inventory,
 Idealized for screenwriters, game designers, programmers and hobbyist writers, to configure and apply dialogues in any type of game.
 
 
-![Screenshot](https://raw.githubusercontent.com/lavaleak/diplomata/master/Textures/Screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/lavaleak/diplomata-unity/master/Textures/Screenshot.jpg)
 
 
 **Features:**
