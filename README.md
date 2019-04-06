@@ -1,8 +1,8 @@
-:rotating_light: This repository will marked as read-only and as legacy soon to be replaced by a new **diplomata-unity** :rotating_light:
+:rotating_light: This repository will be marked as read-only and as legacy soon to be replaced by a new **diplomata-unity** repo :rotating_light:
 
 ---
 
-<img src="https://raw.githubusercontent.com/lavaleak/diplomata-unity/master/Textures/DIPLOMATA-Logo_CC-BY-ND_by-Leona-Araujo.png" alt="Diplomata Logo" title="Diplomata Logo by Leona Araujo is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License." width="115" height="115" /><br/>
+<img src="https://raw.githubusercontent.com/lavaleak/diplomata-unity/master/Textures/DIPLOMATA-Logo-Banner_CC-BY-ND_by-Leona-Araujo.png" alt="Diplomata Logo" title="Diplomata Logo by Leona Araujo is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License." /><br/>
 
 # Diplomata
 
